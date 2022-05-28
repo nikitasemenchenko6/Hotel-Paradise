@@ -10,8 +10,8 @@ import {
   import "./Header.css";
   import { DateRange } from "react-date-range";
   import { useState } from "react";
-  import "react-date-range/dist/styles.css"; // main css file
-  import "react-date-range/dist/theme/default.css"; // theme css file
+  import "react-date-range/dist/styles.css"; 
+  import "react-date-range/dist/theme/default.css"; 
   import { format } from "date-fns";
   import { useNavigate } from "react-router-dom";
   
