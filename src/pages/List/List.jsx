@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import Header from '../../components/Header/Header'
-import Navbar from '../../components/Navbar/Navbar'
-import Search from '../../components/Search/Search'
+import "./list.css";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
-import './List.css';
+import Search from "../../components/Search/Search";
 
 const List = () => {
-    const location = useLocation();
-    const [destination, setDestination] = useState(location?.state?.destination);
-    const [date, setDate] = useState(location?.state?.date);
-    const [openDate, setOpenDate] = useState(false);
-    const [options, setOptions] = useState(location?.state?.options);
-    // console.log(location.pathname)
+  const location = useLocation();
+  const [destination, setDestination] = useState(location.state.destination);
+  const [date, setDate] = useState(location.state.date);
+  const [openDate, setOpenDate] = useState(false);
+  const [options, setOptions] = useState(location.state.options);
+
   return (
     <div>
       <Navbar />
@@ -98,9 +98,9 @@ const List = () => {
             <Search />
           </div>
         </div>
-      </div> 
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default List
+export default List;

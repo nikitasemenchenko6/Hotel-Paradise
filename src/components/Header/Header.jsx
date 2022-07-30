@@ -32,7 +32,7 @@ import {
       room: 1,
     });
   
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
   
     const handleOption = (name, operation) => {
       setOptions((prev) => {
@@ -44,7 +44,7 @@ import {
     };
   
     const handleSearch = () => {
-    //   navigate("/hotels", { state: { destination, date, options } });
+      navigate("/hotels", { state: { destination, date, options } });
     };
   
     return (
