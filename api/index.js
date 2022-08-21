@@ -22,12 +22,12 @@ const connect = async () =>{
         throw error;
     }
 }
-
 //middleware
-app.use("/auth", authRoute);
-app.use("/users", usresRouter);
-app.use("/hotels", hotelRouter);
-app.use("/rooms", roomRouter);
+app.use(express.json());
+app.use("/api/auth", authRoute);
+app.use("/api/users", usresRouter);
+app.use("/api/hotels", hotelRouter);
+app.use("/api/rooms", roomRouter);
 
 
 app.listen(8000, () =>{
