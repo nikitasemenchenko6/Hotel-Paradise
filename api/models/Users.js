@@ -11,17 +11,6 @@ const UserSchema = new mongoose.Schema(
             required: true,
             unique: true,
         },
-        country: {
-            type: String,
-            required: true,
-        },
-        city: {
-            type: String,
-            required: true,
-        },
-        phone: {
-            type: String,
-        },
         password: {
             type: String,
             required: true,
@@ -29,10 +18,7 @@ const UserSchema = new mongoose.Schema(
         isAdmin: {
             type: Boolean,
             default: false
-        },
-        img: {
-            type: String,
-        },
-    }
+        }
+    },{timestamps: true}
 )
 export default mongoose.model('User', UserSchema);
