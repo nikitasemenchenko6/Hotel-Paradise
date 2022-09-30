@@ -9,7 +9,7 @@ export const createRoom = async (req, res, next) =>{
         const savedRoom = await newRoom.save();
         try{
             await Hotel.findByIdAndUpdate(hotelId, 
-                {$push:{rooms: savedRoom._id}
+                {$push:{rooms: savedRoom._id},
             })
         }
         catch(err){
@@ -21,7 +21,32 @@ export const createRoom = async (req, res, next) =>{
         next(err)
     }
 }
+export const deleteRoom = async(req, res, next) =>{
+    const hotelId = req.params.hotelId;
+    try{
+        await Rooms.findByIdAndDelete(req.params.id)
+        try{
+            await Hotel.findByIdAndUpdate(hotelId, {$pull:{rooms: req.params.id}})
+        }
+        catch(err){
+            next(err)
+        }
+        res.status(201).json("Room Has been deleted")
+    }
+    catch(err){
+        nexdt(err)
+    }
 
+}
+export const updateRoom = async (req, res, next) =>{
+    try{
+        const getRoomUpadate = await Rooms.findByIdAndUpdate(req.params.id, {$set: req.body},{new: true})
+        res.status(200).json(getRoomUpadate);
+    }
+    catch(err){
+        next(err)
+    }
+}
 export const getRoom = async (req, res, next) =>{
     try{
         const rooms = await Rooms.find();
