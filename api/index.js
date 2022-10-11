@@ -7,6 +7,7 @@ import hotelRouter from './routes/hotel.js';
 import roomRouter from './routes/rooms.js';
 import { register } from './controllers/auth.js';
 import cookieParser from 'cookie-parser';
+import cors from "cors";
 
 //middlware
 
@@ -25,8 +26,8 @@ const connect = async () => {
         throw error;
     }
 }
-
 //middleware
+app.use(cors())
 app.use(cookieParser())
 app.use(express.json());
 app.use("/api/auth", authRoute);
