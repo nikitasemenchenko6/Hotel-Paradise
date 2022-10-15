@@ -12,7 +12,12 @@ import Header from '../../components/Header/Header';
 import { photos } from './PhotosArray';
 import MailList from '../../components/MailList/MailList';
 import Footer from '../../components/Footer/Footer';
+import useFetch from '../../hooks/useFetch';
+import { useLocation } from 'react-router-dom';
 const Hotel = () => {
+    const location = useLocation().pathname.split("/")[2];
+    const { data, loading, error, reFetchData } = useFetch(`http://localhost:8000/api/hotels/find/${location}`)
+    console.log("da", data)
     const [open, setOpen] = useState(false);
     const [slideNumber, setSlideNumber] = useState(0);
     const handleOpen = (i) => {
@@ -60,16 +65,16 @@ const Hotel = () => {
                 )}
                 <div className="hotelWrapper">
                     <button className="bookNow">Reserve or Book Now!</button>
-                    <h1 className="hotelTitle">Tower Street Apartments</h1>
+                    <h1 className="hotelTitle">{data.title}</h1>
                     <div className="hotelAddress">
                         <FontAwesomeIcon icon={faLocationDot} />
                         <span>Elton St 125 New york</span>
                     </div>
                     <span className="hotelDistance">
-                        Excellent location – 500m from center
+                        Excellent location – {data.distance}m from center
                     </span>
                     <span className="hotelPriceHighlight">
-                        Book a stay over $114 at this property and get a free airport taxi
+                        Book a stay over ${data.cheapestPrice} at this property and get a free airport taxi
                     </span>
                     <div className="hotelImages">
                         {photos.map((photo, i) => (
@@ -87,17 +92,7 @@ const Hotel = () => {
                         <div className="hotelDetailsTexts">
                             <h1 className="hotelTitle">Stay in the heart of City</h1>
                             <p className="hotelDesc">
-                                Located a 5-minute walk from St. Florian's Gate in Krakow, Tower
-                                Street Apartments has accommodations with air conditioning and
-                                free WiFi. The units come with hardwood floors and feature a
-                                fully equipped kitchenette with a microwave, a flat-screen TV,
-                                and a private bathroom with shower and a hairdryer. A fridge is
-                                also offered, as well as an electric tea pot and a coffee
-                                machine. Popular points of interest near the apartment include
-                                Cloth Hall, Main Market Square and Town Hall Tower. The nearest
-                                airport is John Paul II International Kraków–Balice, 16.1 km
-                                from Tower Street Apartments, and the property offers a paid
-                                airport shuttle service.
+                                {data.desc}
                             </p>
                         </div>
                         <div className="hotelDetailsPrice">
@@ -107,7 +102,7 @@ const Hotel = () => {
                                 excellent location score of 9.8!
                             </span>
                             <h2>
-                                <b>$945</b> (9 nights)
+                                <b>${data.cheapestPrice}</b> (9 nights)
                             </h2>
                             <button>Reserve or Book Now!</button>
                         </div>
