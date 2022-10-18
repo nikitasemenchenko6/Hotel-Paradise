@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Hotel.css';
 import {
@@ -14,16 +14,18 @@ import MailList from '../../components/MailList/MailList';
 import Footer from '../../components/Footer/Footer';
 import useFetch from '../../hooks/useFetch';
 import { useLocation } from 'react-router-dom';
+import { SearchContext } from '../../context/SearchContext';
 const Hotel = () => {
     const location = useLocation().pathname.split("/")[2];
     const { data, loading, error, reFetchData } = useFetch(`http://localhost:8000/api/hotels/find/${location}`)
-    console.log("da", data)
     const [open, setOpen] = useState(false);
     const [slideNumber, setSlideNumber] = useState(0);
     const handleOpen = (i) => {
         setSlideNumber(i);
         setOpen(true);
     };
+    const {dates} = useContext(SearchContext);
+    console.log(dates)
     const handleMove = (direction) => {
         let newSlideNumber;
 
