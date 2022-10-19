@@ -24,8 +24,15 @@ const Hotel = () => {
         setSlideNumber(i);
         setOpen(true);
     };
-    const {dates} = useContext(SearchContext);
-    console.log(dates)
+    const {dates, options} = useContext(SearchContext);
+
+    const MILLISECONDS_PER_DAY = 1000*60*60*24;
+    const dayDifferent = (date1, date2) => {
+        const timeDiff = Math.abs(date2.getTime() - date1.getTime())
+        const dayDiff = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+        return dayDiff;
+    }
+    const days = dayDifferent(dates[0].endDate, dates[0].startDate)
     const handleMove = (direction) => {
         let newSlideNumber;
 
@@ -98,13 +105,13 @@ const Hotel = () => {
                             </p>
                         </div>
                         <div className="hotelDetailsPrice">
-                            <h1>Perfect for a 9-night stay!</h1>
+                            <h1>Perfect for a {days}-night stay!</h1>
                             <span>
                                 Located in the real heart of Krakow, this property has an
                                 excellent location score of 9.8!
                             </span>
                             <h2>
-                                <b>${data.cheapestPrice}</b> (9 nights)
+                                <b>${data.cheapestPrice * days * options.room}</b> ({days} nights)
                             </h2>
                             <button>Reserve or Book Now!</button>
                         </div>
