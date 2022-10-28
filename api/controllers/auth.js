@@ -23,11 +23,13 @@ export const register = async (req, res, next) =>{
 export const Login = async (req, res, next) =>{
     try{
         const user = await Users.findOne({username: req.body.username});
-        if(!user) return next(createError(404, "User Not Found"))
-
+        if(!user) {
+            return next(createError(404, "User Not Found"))
+        }
         const isPassword = await bcrypt.compare(req.body.password, user.password)
-        if(!isPassword) return next(createError(404, "Password  Not match"))
-
+        if(!isPassword) {
+            return next(createError(404, "Password  Not match"))
+        }
         const token = jwt.sign({id: user._id, isAdmin: user.isAdmin}, sshkey)
         const {password, isAdmin, ...others} = user._doc;
         res.cookie("access_token", token, {
@@ -37,7 +39,7 @@ export const Login = async (req, res, next) =>{
         .json({details: {...others}, isAdmin})
     }
     catch(err){
-        console.log(err)
+        next(err)
     }
 
 }

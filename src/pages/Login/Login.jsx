@@ -14,14 +14,13 @@ const Login = () => {
         e.preventDefault();
         dispatch({type: "LOGIN_START"});
         try{
-          const response = await axios.post("http://localhost:8000/api/auth/login", credentials)
-          dispatch({type: "LOGIN_SUCCESS", payload:response.data.details});
+          const res = await axios.post("http://localhost:8000/api/auth/login", credentials)
+          dispatch({type: "LOGIN_SUCCESS", payload: res.data.details});
           navigate('/')
-          console.log(response)
+          console.log(res.data)
         }
         catch(err){
           dispatch({type:"LOGIN_FAILURE", payload:err.response.data})
-          console.log(err)
         }   
     }
 
