@@ -5,15 +5,15 @@ import authRoute from './routes/auth.js';
 import usresRouter from './routes/users.js';
 import hotelRouter from './routes/hotel.js';
 import roomRouter from './routes/rooms.js';
-import { register } from './controllers/auth.js';
 import cookieParser from 'cookie-parser';
 import cors from "cors";
+import bodyParser from 'body-parser';
 
 //middlware
-
 const app = express();
 dotenv.config();
 
+const port = 8000
 mongoose.connection.on("disconnected", () => {
     console.log("disconnected");
 })
@@ -27,8 +27,10 @@ const connect = async () => {
     }
 }
 //middleware
-app.use(cors())
-app.use(cookieParser())
+
+app.use(cors());
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/user", usresRouter);
@@ -45,4 +47,4 @@ app.use((err, req, res, next) => {
         stack : err.stack
     })
 })
-app.listen(8000, () => { connect(); console.log("connected") })
+app.listen(port, () => { connect(); console.log("connected") })
