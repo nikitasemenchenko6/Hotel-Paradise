@@ -8,6 +8,6 @@ router.delete("/:id/:hotelId", verifyAdmin, deleteRoom)
 router.get("/all",verifyAdmin, getRoom);
 router.get('/:id', verifyAdmin, findRoom);
 router.put('/:id', verifyAdmin, updateRoom);
-router.put('/availablelity/:id', verifyAdmin, updateRoomAvailablisty);
+router.put('/availablelity/:id',  updateRoomAvailablisty);
 
 export default router;

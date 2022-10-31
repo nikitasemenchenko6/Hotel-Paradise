@@ -17,7 +17,7 @@ const List = () => {
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
   
-  const { data, loading, error, reFetchData } = useFetch(`http://localhost:8000/api/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`)
+  const { data, loading, error, reFetchData } = useFetch(`http://localhost:8000/api/hotels?city=${destination}&min=${min || 0}&max=${max || 20000}`)
 
   const handleSearch = () =>{
     reFetchData();
