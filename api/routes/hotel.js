@@ -3,10 +3,10 @@ import { countByCity, countByType, createHotel, deleteHotel, findHotel, getHotel
 const router = express.Router();
 router.post('/', createHotel);
 router.put('/:id', updateHotel);
-router.delete('/:id', deleteHotel);
+router.delete('/find/:id', deleteHotel);
 router.get('/', showHotel);
 router.get('/find/:id', findHotel);
-router.get('countByCity', countByCity);
+router.get('/countByCity', countByCity);
 router.get('/countByType', countByType);
-router.get('/room/:id', getHotelRooms);
+router.get('/rooms/:id', getHotelRooms);
 export default router;
